@@ -33,7 +33,7 @@ Membership
   
 </style>
 
-
+@include('layouts.navbar')
 @section('content')
 <div class="col-md-12 pt-3">     
   <div class="card-header" style="border: 1px solid rgb(233, 233, 233); border-radius: 5px;">

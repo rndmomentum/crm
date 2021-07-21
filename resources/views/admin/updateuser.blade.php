@@ -4,7 +4,7 @@
     User Information
 @endsection
 
-
+@include('layouts.navbar')
 
 @section('content')
 

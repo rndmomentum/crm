@@ -4,7 +4,7 @@
     Event
 @endsection
 
-
+@include('layouts.navbar')
 @section('content')
 
 <!-- Jquery (For Date) --------------------------------------------------->

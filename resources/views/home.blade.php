@@ -4,7 +4,7 @@
     Dashboard
 @endsection
 
-
+@include('layouts.navbar')
 @section('content')
 @include('layouts.sidebar')
 <div class="container py-5">

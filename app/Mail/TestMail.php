@@ -10,21 +10,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $name, $email;
 
-    // public $data;
+    public $data;
 
-    public function __construct($name)
+    public function __construct($data)
     {
-        $this->name = $name;
+        $this->data = $data;
     }
 
     public function build()
     {
-        $address = 'noreply@momentuminternet.my';
+        $address = 'noreply@momentuminternet.com';
         $subject = 'This is a demo!';
-        $name = $this->name;
-        $test = 'cuba test';
+        $name = 'Jane Doe';
 
         return $this->view('test')
                     ->from($address, $name)
@@ -32,6 +30,6 @@ class TestMail extends Mailable
                     ->bcc($address, $name)
                     ->replyTo($address, $name)
                     ->subject($subject)
-                    ->with([ 'test_message' => $test, 'name' => $this->name ]);
+                    ->with([ 'test_message' => $this->data['message'] ]);
     }
 }

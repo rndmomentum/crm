@@ -33,7 +33,7 @@
   
 </style>
 
-
+@include('layouts.navbar')
 @section('content')
 @include('layouts.sidebar')
 <div class="row py-4">     

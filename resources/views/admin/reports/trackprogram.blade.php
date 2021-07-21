@@ -4,7 +4,7 @@
   Sales Report
 @endsection
 
-
+@include('layouts.navbar')
 @section('content')
 
 <div class="col-md-12 px-4 py-4">   
@@ -62,4 +62,3 @@
     </div>
   </div>
 </div>
-@endsection

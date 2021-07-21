@@ -24,6 +24,7 @@ Route::get('/addpack', function () {
     return view('admin.addpackage');
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Membership programme
@@ -176,21 +177,10 @@ Route::get('deleteuser/{id}', 'AdminController@destroy');
 | Customer registration
 |--------------------------------------------------------------------------
 */
-
 Route::get('/', 'HomeController@viewproduct');
 Route::get('showpackage/{id}', 'HomeController@view');
 Route::get('pendaftaran/{product_id}/{package_id}', 'HomeController@register');
 Route::get('verification/{product_id}/{package_id}', 'HomeController@detailsic');
-
-/*
-|--------------------------------------------------------------------------
-| Customer profile
-|--------------------------------------------------------------------------
-*/
-
-Route::get('customer_profiles', 'ExistCustomerController@customerProfiles');
-Route::get('customer_profiles/{id}', 'ExistCustomerController@customerProfile');
-// Route::get('customers', 'ExistCustomerController@customers');
 
 // Newstudent
 Route::get('maklumat-pembeli/{product_id}/{package_id}/{get_ic}', 'NewCustomerController@createStepOne');
@@ -308,67 +298,9 @@ Route::get('payment', 'TestController@index');
 Route::post('payment-process', 'TestController@process');
 Route::get('test/email', function(){
   
-	$send_mail = 'iqbalkisas6@gmail.com';
+	$send_mail = 'zarina4.11@gmail.com';
   
     dispatch(new App\Jobs\PengesahanJob($send_mail));
   
     dd('send mail successfully !!');
 });
-
-Route::get('/test/bulkmail', 'TestEmailController@testBulkEmails');
-
-Route::get("/emailtemplate", 'EmailTemplate@index');
-Route::get("/emailtemplate/add", 'EmailTemplate@add');
-Route::post("/emailtemplate/add", 'EmailTemplate@create');
-Route::get("/emailtemplate/edit/{id}", 'EmailTemplate@edit');
-Route::put("/emailtemplate/edit/{id}", 'EmailTemplate@update');
-Route::get("/emailtemplate/delete/{id}", 'EmailTemplate@del');
-Route::delete("/emailtemplate/delete/{id}", 'EmailTemplate@remove');
-
-Route::get("/smstemplate", 'SmsTemplate@index');
-Route::get("/smstemplate/add", 'SmsTemplate@add');
-Route::post("/smstemplate/add", 'SmsTemplate@create');
-Route::get("/smstemplate/edit/{id}", 'SmsTemplate@edit');
-Route::put("/smstemplate/edit/{id}", 'SmsTemplate@update');
-Route::get("/smstemplate/delete/{id}", 'SmsTemplate@del');
-Route::delete("/smstemplate/delete/{id}", 'SmsTemplate@remove');
-
-Route::get("/smsblast", 'SmsBulk@index');
-Route::get("/smsblast/add", 'SmsBulk@add');
-Route::post("/smsblast/send", 'SmsBulk@create');
-Route::post("/smsblast/send_bulk", 'SmsBulk@create_bulk');
-Route::get("/smsblast/edit/{id}", 'SmsBulk@edit');
-Route::put("/smsblast/edit/{id}", 'SmsBulk@update');
-Route::get("/smsblast/delete/{id}", 'SmsBulk@del');
-Route::delete("/smsblast/delete/{id}", 'SmsBulk@remove');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
