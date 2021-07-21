@@ -21,22 +21,37 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                         @if(Auth::user()->role_id == 'ROD003' || Auth::user()->role_id == 'ROD004')
+
                         @else 
-                        <li><a class="dropdown-item" href=""><i class="bi bi-person-lines-fill pr-2"></i>Customer Profile</a></li>
+
+                            {{-- <li><a class="dropdown-item" href=""><i class="bi bi-person-lines-fill pr-2"></i>Customer Profile</a></li> --}}
+                            <li><a class="dropdown-item" href="/customer_profiles"><i class="bi bi-person-lines-fill pr-2"></i>Customer Profile</a></li>
+
                         @endif
                         
                         @if(Auth::user()->user_id == 'UID002' || Auth::user()->user_id == 'UID003' || Auth::user()->user_id == 'UID004')
+
                         @else 
-                        <li><a class="dropdown-item" href="/membership"><i class="bi bi-person-badge pr-2"></i>Membership Programme</a></li>
+
+                            <li><a class="dropdown-item" href="/membership"><i class="bi bi-person-badge pr-2"></i>Membership Programme</a></li>
+
                         @endif
+
                         <li><a class="dropdown-item" href="/trackprogram"><i class="bi bi-graph-up pr-2"></i>Sales Report</a></li>
 
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/emailblast"><i class="bi bi-envelope pr-2"></i>Email Blasting</a></li>
+
+                        {{-- <li><a class="dropdown-item" href="/emailblast"><i class="bi bi-envelope pr-2"></i>Email Blasting</a></li> --}}
+                        <li><a class="dropdown-item" href="/emailtemplate"><i class="bi bi-envelope pr-2"></i>Email Template</a></li>
                         
                         @if(Auth::user()->role_id == 'ROD003' || Auth::user()->role_id == 'ROD004')
+
                         @else   
-                        <li><a class="dropdown-item" href=""><i class="bi bi-chat-left-text pr-2"></i>SMS Blasting</a></li>
+
+                            <li><a class="dropdown-item" href="/smsblast"><i class="bi bi-chat-left-text pr-2"></i>SMS Blasting</a></li>
+                            <li><a class="dropdown-item" href="/smstemplate"><i class="bi bi-chat-left-text pr-2"></i>SMS Template</a></li>
+                            {{-- <li><a class="dropdown-item" href=""><i class="bi bi-chat-left-text pr-2"></i>SMS Blasting</a></li> --}}
+
                         @endif
                     </ul>
                 </li>
