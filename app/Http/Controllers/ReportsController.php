@@ -70,7 +70,7 @@ class ReportsController extends Controller
         $student = Student::orderBy('id','desc')->get();
         $product = Product::where('product_id', $product_id)->first();
         $package = Package::where('product_id', $product_id)->get();
-
+      
         // echo 'can';
 
         // return Excel::download(new ProgramExport($payment, $student, $package), $product->name.'.xlsx');
@@ -92,6 +92,7 @@ class ReportsController extends Controller
             'Update Participant',
             'Purchased At'
         ];
+
         
         $file = fopen(public_path('export/') . $fileName, 'w');
         fputcsv($file, $columnNames);

@@ -31,7 +31,7 @@
     }
 </style>
   
-@include('layouts.navbar')
+
 @section('content')
 @include('layouts.sidebar')
 

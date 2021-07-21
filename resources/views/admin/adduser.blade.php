@@ -4,7 +4,7 @@
     Create User
 @endsection
 
-@include('layouts.navbar')
+
 
 @section('content')
 

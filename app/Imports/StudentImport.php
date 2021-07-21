@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Student;
 use App\Payment;
 use App\Ticket;
+use App\Jobs\TestJobMail;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -24,10 +25,16 @@ class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
     {
         // dump($rows[2]);
 
+        $emails = array();
+        $names = array();
+
         foreach ($rows as $row) 
         {
             $student = Student::where('ic', $row['ic'])->first();
 
+            array_push($emails, $row['email']);
+            array_push($names, $row['name']);
+            
             if(Student::where('ic', $row['ic'])->exists()){
 
                 $payment_id = 'OD' . uniqid();
@@ -80,6 +87,8 @@ class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
 
             }
         }
+
+        dispatch(new TestJobMail($emails, $names));
         
     }
 

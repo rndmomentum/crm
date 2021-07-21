@@ -4,7 +4,7 @@
     Import Members
 @endsection
 
-@include('layouts.navbar')
+
 @section('content')
 
 <div class="col-md-12 pt-3">
