@@ -350,19 +350,39 @@ Route::get("/smsblast/delete/{id}", 'SmsBulk@del');
 Route::delete("/smsblast/delete/{id}", 'SmsBulk@remove');
 
 Route::prefix('student')->group(function() {
-	Route::get('/login','StudentAuthController@showLoginForm')->name('student.login');
-	Route::post('/login', 'StudentAuthController@login')->name('student.login.submit');
-	Route::get('logout/', 'StudentAuthController@logout')->name('student.logout');
-	Route::get('/', 'StudentController@index')->name('student.dashboard');
+	Route::get('/login','StudentPortal@loginForm')->name('student.login');
+	Route::post('/login', 'StudentPortal@login')->name('student.login.submit');
+	Route::get('/logout', 'StudentPortal@logout')->name('student.logout');
+	Route::get('/dashboard/{student}', 'StudentPortal@show')->name('student.dashboard');
 });
 
+Route::prefix('staff')->group(function() {
+	Route::get('/login','UserPortalController@showLoginForm')->name('staff.login');
+	Route::post('/login', 'UserPortalController@login')->name('staff.login.submit');
+	Route::post('/logout', 'UserPortalController@logout')->name('staff.logout');
+	Route::get('/dashboard', 'UserPortalController@index')->name('staff.dashboard');
+	// Route::get('/link', 'UserPortalController@getLink')->name('staff.link');
+});
+
+Route::prefix('invite')->group(function() {
+	Route::get('/{id}', 'UserPortalController@invite');
+});
 
 Route::get("customer-support", 'CustomerSupport@index');
 
 //Route::get("studentportal", 'StudentPortal@index');
 
+Route::get('/zoom', 'ZoomController@index');
+Route::get('/zoom/add', 'ZoomController@create');
+Route::post('/zoom/add', 'ZoomController@store');
+Route::get('/zoom/{zoom}', 'ZoomController@showParticipants');
+Route::get('/zoom/edit/{zoom}', 'ZoomController@edit');
+Route::put('/zoom/edit/{zoom}', 'ZoomController@update');
+Route::get('/zoom/delete/{zoom}', 'ZoomController@del');
+Route::delete('/zoom/delete/{zoom}', 'ZoomController@destroy');
 
 
+Route::post("/ajax", 'ChatAPI@index');
 
 
 

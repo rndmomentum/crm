@@ -5,30 +5,29 @@ namespace App\Imports;
 use App\Student;
 use App\Payment;
 use App\Ticket;
-// use App\Jobs\TestJobMail;
+use App\Membership_Level;
+use Illuminate\Support\Facades\Hash;
+use App\Jobs\TestJobMail;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Crypt;
 
 class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
 {
-    // private $prd_id, $pkd_id, $email_id, $regex_content;
-    private $prd_id, $pkd_id, $user_id;
+    private $prd_id, $pkd_id, $email_id, $regex_content;
 
-    // public function __construct($prd_id, $pkd_id, $email_id, $regex_content){
-    public function __construct($prd_id, $pkd_id, $user_id){
+    public function __construct($prd_id, $pkd_id, $email_id, $regex_content){
         $this->product = $prd_id;
         $this->package = $pkd_id;
-        $this->user_id = $user_id;
-        // $this->email_id = $email_id;
-        // $this->regex_content = $regex_content;
+        $this->email_id = $email_id;
+        $this->regex_content = $regex_content;
     }
 
     public function collection(Collection $rows)
     {
-        // dump($rows[2]);
         
         foreach ($rows as $row) 
         {
@@ -48,12 +47,13 @@ class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
                     'email_status'  => 'Hold',
                     'stud_id'       => $student->stud_id,
                     'offer_id'      => $row['offer_id'], 
+                    'user_id'       => $row['user_id'],
                     'product_id'    => $this->product,
                     'package_id'    => $this->package,
-                    'user_id'       => $this->user_id,
                 ]);
 
             }else{
+
                 
                 $stud_id = 'MI' . uniqid();
 
@@ -64,6 +64,7 @@ class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
                     'ic'         => $row['ic'],
                     'email'      => $row['email'],
                     'phoneno'    => '+' . $row['phoneno'],
+                    'student_password' => Hash::make($row['email']),
                 ]);
 
                 // $payment_id = 'OD' . uniqid();
@@ -78,15 +79,15 @@ class StudentImport implements ToCollection, WithChunkReading, WithHeadingRow
                     'email_status'  => 'Hold',
                     'stud_id'       => $stud_id,
                     'offer_id'      => $row['offer_id'], 
+                    'user_id'      => $row['user_id'],
                     'product_id'    => $this->product,
                     'package_id'    => $this->package,
-                    'user_id'       => $this->user_id,
                 ]);
 
             }
         }
 
-        // dispatch(new TestJobMail($rows, $this->email_id, $this->regex_content));
+        dispatch(new TestJobMail($rows, $this->email_id, $this->regex_content));
         
     }
 

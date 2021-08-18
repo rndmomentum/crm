@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class CustomerSupport extends Controller
 {
@@ -14,6 +15,7 @@ class CustomerSupport extends Controller
     public function index()
     {
         $maintenance = true;
+		//Auth::user();
 		
 		return view("admin.customer_support", compact("maintenance"));
     }

@@ -66,10 +66,12 @@ class customerProfileController extends Controller
 
     public function customerProfile($id, Request $request) {
         $customer = Student::where('id', $id)->first();
+        
         $payment = Payment::where('stud_id', $customer['stud_id'])
         ->orderBy('created_at', 'DESC')
         ->get();
-        $member_lvl = Membership_Level::where('level_id', $customer->level_id)->first();
+
+        $member_lvl = Membership_Level::where('level_id', $customer->level_id)->first()->name;
         $comment = Comment::where('stud_id', $customer['stud_id'])->get();
 		
 		$ncomment = [];

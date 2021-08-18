@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+
+    public const HOME = '/dashboard';
     /**
      * The policy mappings for the application.
      *
